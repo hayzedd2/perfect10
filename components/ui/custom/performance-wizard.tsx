@@ -8,7 +8,6 @@ import {
   IconChevronRight,
   IconArrowRight,
   IconX,
-  IconFilter,
 } from "@tabler/icons-react"
 import { InputGroup, InputGroupAddon, InputGroupInput } from "../input-group"
 import { Button } from "../button"
@@ -41,12 +40,12 @@ const POPULAR_OPPONENTS = [
 ]
 
 function getRatingBg(rating: number): string {
-  if (rating >= 9.0) return "bg-emerald-500"
-  if (rating >= 8.0) return "bg-green-500"
-  if (rating >= 7.0) return "bg-lime-500"
-  if (rating >= 6.5) return "bg-yellow-500"
-  if (rating >= 6.0) return "bg-orange-500"
-  return "bg-red-500"
+  if (rating >= 9.0) return "bg-[#2F41BF]"
+  if (rating >= 8.0) return "bg-[#01ADC4]"
+  if (rating >= 7.0) return "bg-[#01C424]"
+  if (rating >= 6.5) return "bg-[#D9AF01]"
+  if (rating >= 6.0) return "bg-[#ED7E07]"
+  return "bg-[#CD0B01]"
 }
 
 export const PerformanceWizard = ({
@@ -184,7 +183,7 @@ export const PerformanceWizard = ({
           {steps.map((s, i) => (
             <div
               key={s}
-              className={`h-1.5 w-6 rounded-full transition-colors ${
+              className={`h-1.5 w-6  transition-colors ${
                 i <= stepIndex ? "bg-green-500" : "bg-white/10"
               }`}
             />
@@ -221,7 +220,7 @@ export const PerformanceWizard = ({
                   <button
                     key={player.id}
                     onClick={() => handleSelectPlayer(player)}
-                    className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-white/5"
+                    className="flex w-full items-center gap-3 r px-3 py-2.5 text-left transition-colors hover:bg-white/5"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -229,7 +228,10 @@ export const PerformanceWizard = ({
                       alt=""
                       className="size-10 rounded-full bg-white/10 object-cover"
                       onError={(e) => {
-                        ;(e.target as HTMLImageElement).style.display = "none"
+                        const target = e.currentTarget
+                        if (!target.src.endsWith("/player.svg")) {
+                          target.src = "/player.svg"
+                        }
                       }}
                     />
                     <div className="min-w-0 flex-1">
@@ -253,7 +255,7 @@ export const PerformanceWizard = ({
                           </span>
                         )}
                         {player.position && (
-                          <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px]">
+                          <span className="bg-white/10 px-1.5 py-0.5 text-[10px]">
                             {player.position === "F"
                               ? "Forward"
                               : player.position === "M"
@@ -287,7 +289,7 @@ export const PerformanceWizard = ({
         {step === "search-opponent" && (
           <div className="p-5">
             {/* Selected player badge */}
-            <div className="mb-4 flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-3 py-2.5">
+            <div className="mb-4 flex items-center justify-between  border border-white/10 bg-white/5 px-3 py-2.5">
               <div className="flex items-center gap-2.5">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -295,7 +297,10 @@ export const PerformanceWizard = ({
                   alt=""
                   className="size-8 rounded-full bg-white/10 object-cover"
                   onError={(e) => {
-                    ;(e.target as HTMLImageElement).style.display = "none"
+                    const target = e.currentTarget
+                    if (!target.src.endsWith("/player.svg")) {
+                      target.src = "/player.svg"
+                    }
                   }}
                 />
                 <div>
@@ -307,7 +312,7 @@ export const PerformanceWizard = ({
                   </p>
                 </div>
               </div>
-              <span className="rounded bg-green-500/10 px-2 py-0.5 text-[11px] font-medium text-green-400">
+              <span className="bg-green-500/10 px-2 py-0.5 text-[11px] font-medium text-green-400">
                 Selected
               </span>
             </div>
@@ -345,7 +350,7 @@ export const PerformanceWizard = ({
                     <button
                       key={opp.name}
                       onClick={() => setTeamQuery(opp.q)}
-                      className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-white/70 transition-colors hover:border-green-500/40 hover:bg-green-500/10 hover:text-white"
+                      className="border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-white/70 transition-colors hover:border-green-500/40 hover:bg-green-500/10 hover:text-white"
                     >
                       {opp.name}
                     </button>
@@ -357,7 +362,7 @@ export const PerformanceWizard = ({
             {/* Skip button */}
             <button
               onClick={handleSkipOpponent}
-              className="mb-4 flex w-full items-center justify-between rounded-lg border border-dashed border-white/15 px-3 py-2.5 text-left transition-colors hover:border-green-500/40 hover:bg-white/5"
+              className="mb-4 flex w-full items-center justify-between  border border-dashed border-white/15 px-3 py-2.5 text-left transition-colors hover:border-green-500/40 hover:bg-white/5"
             >
               <div>
                 <span className="text-sm font-medium text-white/70">
@@ -378,7 +383,7 @@ export const PerformanceWizard = ({
                   <button
                     key={team.id}
                     onClick={() => handleSelectOpponent(team)}
-                    className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-white/5"
+                    className="flex w-full items-center gap-3  px-3 py-2.5 text-left transition-colors hover:bg-white/5"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -426,9 +431,8 @@ export const PerformanceWizard = ({
             {/* Opponent Filter Bar */}
             <div className="mb-4 space-y-2">
               {selectedOpponent ? (
-                <div className="flex items-center justify-between rounded-lg border border-green-500/30 bg-green-500/10 px-3 py-2">
+                <div className="flex items-center justify-between  border border-green-500/30 bg-green-500/10 px-3 py-2">
                   <div className="flex min-w-0 items-center gap-2">
-                    <IconFilter className="size-4 shrink-0 text-green-400" />
                     <span className="shrink-0 text-xs text-green-300">
                       Filtered vs:
                     </span>
@@ -447,7 +451,7 @@ export const PerformanceWizard = ({
                   </div>
                   <button
                     onClick={handleClearOpponentFilter}
-                    className="ml-2 flex shrink-0 items-center gap-1 rounded bg-white/10 px-2 py-0.5 text-xs text-white/70 transition-colors hover:bg-white/20 hover:text-white"
+                    className="ml-2 flex shrink-0 items-center gap-1  bg-white/10 px-2 py-0.5 text-xs text-white/70 transition-colors hover:bg-white/20 hover:text-white"
                   >
                     <IconX className="size-3" />
                     <span>Clear</span>
@@ -573,7 +577,7 @@ export const PerformanceWizard = ({
                       <button
                         key={event.id}
                         onClick={() => handleSelectMatch(event)}
-                        className="group flex w-full items-center gap-3 rounded-lg border border-white/5 bg-white/[0.03] px-3.5 py-3 text-left transition-all hover:border-green-500/40 hover:bg-white/[0.07]"
+                        className="group  w-full items-center gap-3 border border-white/5 bg-white/3 px-3.5 py-3 text-left transition-all hover:border-green-500/40 hover:bg-white/[0.07]"
                       >
                         <div className="flex min-w-0 flex-1 items-center gap-2">
                           {/* Home team */}
@@ -594,7 +598,7 @@ export const PerformanceWizard = ({
                           </div>
 
                           {/* Score badge */}
-                          <div className="shrink-0 rounded-md bg-white/10 px-3 py-1 text-center group-hover:bg-green-500/20">
+                          <div className="shrink-0  bg-white/10 px-3 py-1 text-center group-hover:bg-green-500/20">
                             <span className="text-sm font-bold text-white group-hover:text-green-400">
                               {event.homeScore.current ?? "?"} -{" "}
                               {event.awayScore.current ?? "?"}
@@ -620,11 +624,12 @@ export const PerformanceWizard = ({
                         </div>
 
                         {/* Date and Tournament info */}
-                        <div className="min-w-[90px] shrink-0 text-right">
+                        <div className="w-full mt-1 flex gap-1 items-center justify-center">
                           <p className="text-[11px] font-medium text-white/50">
-                            {dateStr}
+                            {dateStr} 
                           </p>
-                          <p className="max-w-[110px] truncate text-[10px] text-white/30">
+                          <p>-</p>
+                          <p className="max-w-27.5 truncate text-[11px] text-white/30">
                             {event.tournament.name}
                           </p>
                         </div>
@@ -672,7 +677,10 @@ export const PerformanceWizard = ({
                     alt=""
                     className="size-16 rounded-full bg-white/10 object-cover"
                     onError={(e) => {
-                      ;(e.target as HTMLImageElement).style.display = "none"
+                      const target = e.currentTarget
+                      if (!target.src.endsWith("/player.svg")) {
+                        target.src = "/player.svg"
+                      }
                     }}
                   />
                   <div className="flex-1">
@@ -719,7 +727,7 @@ export const PerformanceWizard = ({
                   {/* Big rating */}
                   {stats.statistics.rating && (
                     <div
-                      className={`${getRatingBg(stats.statistics.rating)} rounded-xl px-4 py-2`}
+                      className={`${getRatingBg(stats.statistics.rating)} px-4 py-2`}
                     >
                       <span className="text-2xl font-bold text-white">
                         {stats.statistics.rating.toFixed(1)}
@@ -859,7 +867,7 @@ function StatItem({
   if (value === undefined || value === null) return null
 
   return (
-    <div className="rounded-lg bg-white/5 px-3 py-2">
+    <div className=" bg-white/5 px-3 py-2">
       <p className="text-[10px] tracking-wider text-white/30 uppercase">
         {label}
       </p>
