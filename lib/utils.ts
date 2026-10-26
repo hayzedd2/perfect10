@@ -1,5 +1,16 @@
 export { cn } from "cn"
 
+export function truncate(text: string, maxLength: number): string {
+  return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text
+}
+
+export function formatMatchDate(timestamp: number): string {
+  return new Date(timestamp * 1000).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  })
+}
 
 export function getRatingBg(rating: number): string {
   if (rating >= 9.0) return "bg-[#2F41BF]"

@@ -32,6 +32,10 @@ export interface SofaTeam {
   shortName?: string
   nameCode?: string
   national: boolean
+  sport?: {
+    id?: number
+    slug?: string
+  }
   teamColors?: {
     primary: string
     secondary: string
